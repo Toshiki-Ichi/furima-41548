@@ -11,21 +11,22 @@
 ### Association
 
 - has_many :items
-- has_one :customer
+- has_many :customer
 
 
 ## items テーブル
 
-| Column        | Type        | Options                        |
-| ------------- | ----------- | ------------------------------ |
-| item_name     | string      | null: false                    |
-| text          | text        | null: false                    |
-| price         | integer     | null: false                    |
-| category      | string      | null: false                    |
-| status        | string      | null: false                    |
-| responsible   | string      | null: false                    |
-| region        | string      | null: false                    |
-| user_id       | references  | null: false, foreign_key: true |
+| Column          | Type        | Options                        |
+| --------------- | ----------- | ------------------------------ |
+| item_name       | string      | null: false                    |
+| note            | text        | null: false                    |
+| price           | integer     | null: false                    |
+| category_id     | integer     | null: false                    |
+| status_id       | integer     | null: false                    |
+| responsible_id  | integer     | null: false                    |
+| region_id       | integer     | null: false                    |
+| shipping_day_id | integer     | null: false                    |
+| user            | references  | null: false, foreign_key: true |
 
 
 ### Association
@@ -35,26 +36,29 @@
 
 ## customers テーブル
 
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| user_id   | references | null: false, foreign_key: true |
-| item_id   | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 ### Association
 
 - has_one :areas
+- belongs_to :item
 - belongs_to :user
+
 
 ## areas テーブル
 
-| Column          | Type        | Options                        |
+| Column      | Type        | Options                        |
 | ----------- | ----------- | ------------------------------ |
-| postal      | integer     | null: false |
-| prefecture  | string      | null: false |
-| city        | string      | null: false |
-| city_num    | string      | null: false |
-| building    | string      |             |
-| tel_num     | integer     | null: false |
+| postal      | string  　  | null: false                    |
+| region_id   | string      | null: false                    |
+| city        | string      | null: false                    |
+| city_num    | string      | null: false                    |
+| building    | string      |                                |
+| tel_num     | string      | null: false                    |
+| customer    | references  | null: false, foreign_key: true |
 
 ### Association
 
