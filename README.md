@@ -7,8 +7,8 @@
 | nickname           | string  | null: false               |
 | email              | string  | null: false, unique: true |
 | encrypted_password | string  | null: false               |
-| hira_family        | string  | null: false               |
-| hira_name          | string  | null: false               |
+| kanji_family        | string  | null: false               |
+| kanji_name          | string  | null: false               |
 | kata_family        | string  | null: false               |
 | kata_name          | string  | null: false               |
 | birthday           | date    | null: false               |
