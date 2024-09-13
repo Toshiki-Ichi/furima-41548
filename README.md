@@ -2,16 +2,22 @@
 
 ## users テーブル
 
-| Column             | Type   | Options                   |
-| ------------------ | ------ | ------------------------- |
-| name               | string | null: false               |
-| email              | string | null: false, unique: true |
-| encrypted_password | string | null: false               |
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
+| name_hira          | string  | null: false               |
+| name_kata          | string  | null: false               |
+| year               | integer | null: false               |
+| month              | integer | null: false               |
+| day                | integer | null: false               |
+
 
 ### Association
 
 - has_many :items
-- has_many :customer
+- has_many :customers
 
 
 ## items テーブル
@@ -53,7 +59,7 @@
 | Column      | Type        | Options                        |
 | ----------- | ----------- | ------------------------------ |
 | postal      | string  　  | null: false                    |
-| region_id   | string      | null: false                    |
+| region_id   | integer     | null: false                    |
 | city        | string      | null: false                    |
 | city_num    | string      | null: false                    |
 | building    | string      |                                |
