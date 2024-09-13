@@ -7,11 +7,11 @@
 | nickname           | string  | null: false               |
 | email              | string  | null: false, unique: true |
 | encrypted_password | string  | null: false               |
-| name_hira          | string  | null: false               |
-| name_kata          | string  | null: false               |
-| year               | integer | null: false               |
-| month              | integer | null: false               |
-| day                | integer | null: false               |
+| hira_family        | string  | null: false               |
+| hira_name          | string  | null: false               |
+| kata_family        | string  | null: false               |
+| kata_name          | string  | null: false               |
+| birthday           | date    | null: false               |
 
 
 ### Association
@@ -49,7 +49,7 @@
 
 ### Association
 
-- has_one :areas
+- has_one :area
 - belongs_to :item
 - belongs_to :user
 
@@ -58,7 +58,7 @@
 
 | Column      | Type        | Options                        |
 | ----------- | ----------- | ------------------------------ |
-| postal      | string  　  | null: false                    |
+| postal      | string      | null: false                    |
 | region_id   | integer     | null: false                    |
 | city        | string      | null: false                    |
 | city_num    | string      | null: false                    |
