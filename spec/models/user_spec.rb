@@ -45,11 +45,23 @@ RSpec.describe User, type: :model do
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
-      it 'パスワードは、半角英数字混合でないと登録できない' do
+      it 'パスワードは、半角数字のみでは登録できない' do
         @user.password = '000000'
         @user.password_confirmation = '000000'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Password は英字と数字の両方を含む必要があります')
+        expect(@user.errors.full_messages).to include('Password は半角の英字と数字の両方を含む必要があります')
+      end
+      it 'パスワードは、半角英字のみでは登録できない' do
+        @user.password = 'aaaaaa'
+        @user.password_confirmation = 'aaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password は半角の英字と数字の両方を含む必要があります')
+      end
+      it 'パスワードは、全角では登録できない' do
+        @user.password = 'ああああああ'
+        @user.password_confirmation = 'ああああああ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password は半角の英字と数字の両方を含む必要があります')
       end
       it 'emailは@を含まないと登録できない' do
         @user.email = 'testmail'
@@ -66,13 +78,13 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Kanji name can't be blank")
       end
-      it 'お名前(全角)の名字は、全角（漢字・ひらがな・カタカナ）でないと登録できない' do
-        @user.kanji_family = FactoryBot.build(:user, kanji_family: @user.kanji_family)
+      it 'お名前(全角)の名字は、全角（漢字・ひらがな・カタカナ）のいずれかでないと登録できない' do
+        @user.kanji_family = 'asdf'
         @user.valid?
         expect(@user.errors.full_messages).to include('Kanji family is invalid')
       end
-      it 'お名前(全角)の名前は、全角（漢字・ひらがな・カタカナ）でないと登録できない' do
-        @user.kanji_name = FactoryBot.build(:user, kanji_name: @user.kanji_name)
+      it 'お名前(全角)の名前は、全角（漢字・ひらがな・カタカナ）のいずれかでないと登録できない' do
+        @user.kanji_name = '1234'
         @user.valid?
         expect(@user.errors.full_messages).to include('Kanji name is invalid')
       end
