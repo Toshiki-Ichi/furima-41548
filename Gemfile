@@ -82,6 +82,5 @@ end
 gem 'active_hash'
 gem 'devise'
 
-group :development do
-  gem 'pry'
-end
+
+  gem 'pry-rails'

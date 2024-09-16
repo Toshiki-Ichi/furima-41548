@@ -4,8 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
          # カタカナのバリデーション #テスト時通らないなら他のカラムのpresenceも記述する
-  validates :kata_family, presence: true, format: { with: /\A[ァ-ヴー]+\z/}
-  validates :kata_name, presence: true, format: { with: /\A[ァ-ヴー]+\z/}
+         validates :nickname, :kanji_family, :kanji_name, :birthday, presence: true
+         validates :kata_family, presence: true, format: { with: /\A[ァ-ヴー]+\z/}
+         validates :kata_name, presence: true, format: { with: /\A[ァ-ヴー]+\z/}
+         validates :kanji_family, presence: true, format: { with: /\A[ぁ-んァ-ンーａ-ｚＡ-Ｚ０-９々〆〤一-龯]+\z/}
+         validates :kanji_name, presence: true, format: { with: /\A[ぁ-んァ-ンーａ-ｚＡ-Ｚ０-９々〆〤一-龯]+\z/}
 
    # パスワードのバリデーション
    validate :password_complexity
