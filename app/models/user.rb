@@ -9,11 +9,8 @@ class User < ApplicationRecord
   validates :kanji_family, presence: true, format:  { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
   validates :kanji_name, presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
 
-
   validate :password_complexity
-
-  - has_many :items
-
+  has_many :items
   private
 
   def password_complexity
