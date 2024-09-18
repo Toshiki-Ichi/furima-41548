@@ -1,6 +1,6 @@
 class Region < ActiveHash::Base
-	self.data = [
-    { id: 1, place: '---' }, 
+  self.data = [
+    { id: 1, place: '---' },
     { id: 2, place: '北海道' },
     { id: 3, place: '青森県' },
     { id: 4, place: '岩手県' },
@@ -49,7 +49,7 @@ class Region < ActiveHash::Base
     { id: 47, place: '鹿児島県' },
     { id: 48, place: '沖縄県' }
   ]
-	
-include ActiveHash::Associations
-has_many :items
+
+  include ActiveHash::Associations
+  has_many :items
 end

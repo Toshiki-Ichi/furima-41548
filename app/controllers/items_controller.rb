@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   def index
     @items = Item.includes(:user)
   end
-   
+
   def new
     @item = Item.new
   end
@@ -16,16 +16,18 @@ class ItemsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-	end
+  end
 
   private
+
   def item_params
-    params.require(:item).permit(:item_name, :note, :image, :price, :category_id, :status_id, :responsible_id, :region_id, :shipping_day_id)
+    params.require(:item).permit(:item_name, :note, :image, :price, :category_id, :status_id, :responsible_id, :region_id,
+                                 :shipping_day_id)
   end
 
-	def move_to_index
-    unless user_signed_in?
-      redirect_to user_session_path
-    end
+  def move_to_index
+    return if user_signed_in?
+
+    redirect_to user_session_path
   end
-  end
+end

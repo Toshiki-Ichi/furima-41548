@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :item do
     item_name                    { Faker::Name.name }
     note                         { Faker::Lorem.sentence }
-    price                        { rand(300..9999999) }
+    price                        { rand(300..9_999_999) }
     category_id                  { rand(2..11) }
     status_id                    { rand(2..7) }
     region_id                    { rand(2..48) }
