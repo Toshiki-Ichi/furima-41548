@@ -73,7 +73,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Responsible must be other than 1')
       end
       it 'userが紐付いていないと保存できない' do
-				@item.user = nil
+        @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
       end
