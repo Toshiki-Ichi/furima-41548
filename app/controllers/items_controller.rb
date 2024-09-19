@@ -22,6 +22,16 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def destroy
+    if user_signed_in? && current_user.id == item.user.id
+      item = Item.find(params[:id])
+      item.destroy
+      redirect_to root_path
+    else
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def item_params
