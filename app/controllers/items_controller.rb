@@ -37,20 +37,19 @@ class ItemsController < ApplicationController
     if user_signed_in? && current_user.id == @item.user.id
 
     else
-      redirect_to root_path
-    end
+    redirect_to root_path
+   end
   end
 
   def update
     @item = Item.find(params[:id])
     @item.update(item_params)
     if @item.save
-      redirect_to item_path(@item)
+    redirect_to item_path(@item)
     else
-      render :edit, status: :unprocessable_entity
-    end
+    render :edit, status: :unprocessable_entity
   end
-
+end
   private
 
   def item_params
