@@ -1,3 +1,4 @@
+const price = () => {
 	const priceInput = document.getElementById('item-price');
 	let resultDisplay = document.getElementById('add-tax-price');
 	let Profit = document.getElementById('profit');
@@ -18,3 +19,7 @@
 				resultDisplay.textContent = '0';
 		}
 })
+
+};
+window.addEventListener("turbo:load", price);
+window.addEventListener("turbo:render", price);
