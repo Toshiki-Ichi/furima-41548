@@ -36,6 +36,8 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
     if user_signed_in? && current_user.id == @item.user.id
 
+    elsif !user_signed_in?
+      redirect_to user_session_path
     else
       redirect_to root_path
     end
