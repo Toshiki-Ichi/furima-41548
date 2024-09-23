@@ -1,15 +1,12 @@
 class CustomersController < ApplicationController
   def index
+		@customer_area = CustomerArea.new
     @item = Item.find(params[:item_id]) 
 		gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
   end
 
-
-	def new
-		@customer = Customer.find(params[:customer_id])
-	end
-
 	def create
+		buinding.pry
     @customer = Customer.new(customer_params)
     if @cutomer.valid?
       pay_item
@@ -23,7 +20,7 @@ class CustomersController < ApplicationController
 
 private
 def customer_params
-params.require(:customer).permit(:price).merge(token:params[:token])
+params.require(:customer_area).permit(:price).merge(token:params[:token])
 end
 def pay_item
 	Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  

@@ -1,4 +1,4 @@
-class CustomerAre
+class CustomerArea
   include ActiveModel::Model
 	attr_accessor :user_id, :item_id,:postal, :region_id, :city, :city_num, :building, :tel_num, :customer_id
 
