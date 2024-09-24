@@ -1,16 +1,13 @@
 class CustomerArea
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal, :region_id, :city, :city_num, :building, :tel_num, :customer_id
-  attr_accessor :token, :price
+  attr_accessor :user_id, :item_id, :postal, :region_id, :city, :city_num, :building, :tel_num
+  attr_accessor :token, :customer_id
 
-  validates :user_id, :item_id, :customer_id, :city_num, :price, presence: true
+  validates :user_id, :item_id, :city_num, presence: true
   validate :postal_validation
   validates :region_id, numericality: { other_than: 1, message: 'is invalid' }
   validate :city_validation
   validate :tel_num_validation
-
-  validates :price, format: { with: /\A\d+\z/, message: 'は半角数字のみで入力してください' }
-  validates :price, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 9_999_999 }
 
   def save
     customer = Customer.create(user_id:, item_id:)
