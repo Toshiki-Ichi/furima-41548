@@ -1,11 +1,15 @@
-class CustomersController < ApplicationController
+class CustomersController < ApplicationController  
+  before_action :authenticate_user!, only: [:index,:create]
+  before_action :set_item, only: [:index, :create]
+
   def index
-		@item = Item.find(params[:item_id]) 
+    if current_user.id == @item.user.id || Customer.where(item_id: @item.id).exists? 
+      redirect_to root_path 
+    end 
 		@customer_area = CustomerArea.new
   end
 
 	def create
-		@item = Item.find(params[:item_id]) 
     @customer_area = CustomerArea.new(customer_params)
     @customer_area.price = @item.price
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -33,4 +37,7 @@ def pay_item
 )
 end
 
+def set_item
+@item = Item.find(params[:item_id]) 
+end
 end
