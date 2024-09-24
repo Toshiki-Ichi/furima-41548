@@ -30,7 +30,7 @@ params.require(:customer_area).permit(:postal, :region_id, :city, :city_num, :bu
 
 end
 def pay_item
-	Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  
+	Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
 	Payjp::Charge.create(
   amount: @customer_area.price, 
   card: @customer_area.token,  
