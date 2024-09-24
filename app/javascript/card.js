@@ -11,6 +11,8 @@ const pay = () => {
 		cvcElement.mount("#cvc-form");
 		const form = document.getElementById('charge-form');
 
+		form.removeEventListener("submit", handleSubmit);
+
 		form.addEventListener("submit",(e)=>{
 			e.preventDefault();
 			payjp.createToken(numberElement).then(function(response){
@@ -31,4 +33,3 @@ const pay = () => {
 };
 
 window.addEventListener("turbo:load", pay);
-window.addEventListener("turbo:render", pay);

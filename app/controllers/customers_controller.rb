@@ -3,6 +3,7 @@ class CustomersController < ApplicationController
   before_action :set_item, only: [:index, :create]
 
   def index
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     if current_user.id == @item.user.id || Customer.where(item_id: @item.id).exists? 
       redirect_to root_path 
     end 
