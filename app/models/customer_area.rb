@@ -17,8 +17,8 @@ class CustomerArea
 
 
   def save
-	  customer = Customer.create(user_id: user_id, item_id: item_id, customer_id: customer_id)
+	  customer = Customer.create(user_id: user_id, item_id: item_id)
 
-		Area.create(postal: postal, region_id: region_id, city: city, city_num: city_num, building: building, tel_num: tel_num)
+		Area.create(postal: postal, region_id: region_id, city: city, city_num: city_num, building: building, tel_num: tel_num, customer_id: customer.id)
   end
 end
