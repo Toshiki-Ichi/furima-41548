@@ -5,11 +5,11 @@ FactoryBot.define do
     city { '東京都' }
     city_num { '1-1' }
     building { '東京ハイツ' }
-		tel_num{'08012345678'}
+    tel_num { '08012345678' }
     price { 2000 }
-		token {Faker::Alphanumeric.alphanumeric(number: 20)}
-		user_id{1}
-		item_id{1}
-		customer_id{1}
+    token { Faker::Alphanumeric.alphanumeric(number: 20) }
+    user_id { 1 }
+    item_id { 1 }
+    customer_id { 1 }
   end
 end

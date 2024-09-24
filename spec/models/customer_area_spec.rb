@@ -1,12 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe CustomerArea, type: :model do
-
   before do
     @customer_area = FactoryBot.build(:customer_area)
   end
   describe '商品購入機能' do
-
     context '購入できる場合' do
       it 'すべての値が正しく入力されていれば購入できること' do
         expect(@customer_area).to be_valid
@@ -28,14 +26,14 @@ RSpec.describe CustomerArea, type: :model do
         expect(@customer_area.errors.full_messages).to include("Postal can't be blank")
       end
       it 'postalが半角のハイフンを含んだ正しい形式でないと購入できないこと' do
-        @customer_area.postal= '1234567'
+        @customer_area.postal = '1234567'
         @customer_area.valid?
-        expect(@customer_area.errors.full_messages).to include("Postal は「XXX-XXXX」の形式で入力してください")
+        expect(@customer_area.errors.full_messages).to include('Postal は「XXX-XXXX」の形式で入力してください')
       end
       it 'region_idを選択していないと購入できないこと' do
         @customer_area.region_id = 1
         @customer_area.valid?
-        expect(@customer_area.errors.full_messages).to include("Region is invalid")
+        expect(@customer_area.errors.full_messages).to include('Region is invalid')
       end
       it 'cityが空だと購入できないこと' do
         @customer_area.city = ''
@@ -55,17 +53,17 @@ RSpec.describe CustomerArea, type: :model do
       it 'priceが全角数字だと購入できないこと' do
         @customer_area.price = '２０００'
         @customer_area.valid?
-        expect(@customer_area.errors.full_messages).to include("Price は半角数字のみで入力してください")
+        expect(@customer_area.errors.full_messages).to include('Price は半角数字のみで入力してください')
       end
       it 'priceが1円未満では購入できないこと' do
         @customer_area.price = 0
         @customer_area.valid?
-        expect(@customer_area.errors.full_messages).to include("Price must be greater than or equal to 1")
+        expect(@customer_area.errors.full_messages).to include('Price must be greater than or equal to 1')
       end
       it 'priceが1,000,000以上では購入できないこと' do
-        @customer_area.price = 10000000
+        @customer_area.price = 10_000_000
         @customer_area.valid?
-        expect(@customer_area.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@customer_area.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it 'tel_numが空だと購入できないこと' do
         @customer_area.tel_num = ''
@@ -73,14 +71,14 @@ RSpec.describe CustomerArea, type: :model do
         expect(@customer_area.errors.full_messages).to include("Tel num can't be blank")
       end
       it 'tel_numが(-)がある購入できないこと' do
-        @customer_area.tel_num= '180-1234-4567'
+        @customer_area.tel_num = '180-1234-4567'
         @customer_area.valid?
-        expect(@customer_area.errors.full_messages).to include("Tel num は10桁以上11桁以下の半角数字で入力してください")
+        expect(@customer_area.errors.full_messages).to include('Tel num は10桁以上11桁以下の半角数字で入力してください')
       end
       it 'tel_numが10桁以上11桁以下の半角数字のみでないと購入できないこと' do
-        @customer_area.tel_num= '18012344'
+        @customer_area.tel_num = '18012344'
         @customer_area.valid?
-        expect(@customer_area.errors.full_messages).to include("Tel num は10桁以上11桁以下の半角数字で入力してください")
+        expect(@customer_area.errors.full_messages).to include('Tel num は10桁以上11桁以下の半角数字で入力してください')
       end
       it 'userが紐付いていないと購入できないこと' do
         @customer_area.user_id = nil
@@ -100,4 +98,3 @@ RSpec.describe CustomerArea, type: :model do
     end
   end
 end
-
