@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CustomerArea, type: :model do
   before do
     @user = FactoryBot.create(:user)
-    @item = FactoryBot.create(:item, user: @user)
+    @item = FactoryBot.create(:item)
     @customer_area = FactoryBot.build(:customer_area,user_id: @user.id, item_id: @item.id)
    end
 
@@ -60,13 +60,18 @@ RSpec.describe CustomerArea, type: :model do
         @customer_area.valid?
         expect(@customer_area.errors.full_messages).to include("Tel num can't be blank")
       end
-      it 'tel_numが(-)がある場合購入できないこと' do
+      it 'tel_numに数値以外 例:(-) がある場合購入できないこと' do
         @customer_area.tel_num = '180-1234-4567'
         @customer_area.valid?
         expect(@customer_area.errors.full_messages).to include('Tel num は10桁以上11桁以下の半角数字で入力してください')
       end
-      it 'tel_numが9桁以下12桁以下の半角数字では購入できないこと' do
+      it 'tel_numが9桁以下では購入できないこと' do
         @customer_area.tel_num = '180123456'
+        @customer_area.valid?
+        expect(@customer_area.errors.full_messages).to include('Tel num は10桁以上11桁以下の半角数字で入力してください')
+      end
+      it 'tel_numが12桁以上では購入できないこと' do
+        @customer_area.tel_num = '1801234561234'
         @customer_area.valid?
         expect(@customer_area.errors.full_messages).to include('Tel num は10桁以上11桁以下の半角数字で入力してください')
       end
