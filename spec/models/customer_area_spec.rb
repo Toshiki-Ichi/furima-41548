@@ -20,6 +20,11 @@ RSpec.describe CustomerArea, type: :model do
     end
 
     context '購入できない場合' do
+      it 'tokenが空だと購入できないこと' do
+        @customer_area.token = ''
+        @customer_area.valid?
+        expect(@customer_area.errors.full_messages).to include("Token can't be blank")
+      end
       it 'postalが空だと購入できないこと' do
         @customer_area.postal = ''
         @customer_area.valid?
@@ -50,13 +55,13 @@ RSpec.describe CustomerArea, type: :model do
         @customer_area.valid?
         expect(@customer_area.errors.full_messages).to include("Tel num can't be blank")
       end
-      it 'tel_numが(-)がある購入できないこと' do
+      it 'tel_numが(-)がある場合購入できないこと' do
         @customer_area.tel_num = '180-1234-4567'
         @customer_area.valid?
         expect(@customer_area.errors.full_messages).to include('Tel num は10桁以上11桁以下の半角数字で入力してください')
       end
-      it 'tel_numが10桁以上11桁以下の半角数字のみでないと購入できないこと' do
-        @customer_area.tel_num = '18012344'
+      it 'tel_numが9桁以下12桁以下の半角数字では購入できないこと' do
+        @customer_area.tel_num = '180123456'
         @customer_area.valid?
         expect(@customer_area.errors.full_messages).to include('Tel num は10桁以上11桁以下の半角数字で入力してください')
       end

@@ -3,7 +3,7 @@ class CustomerArea
   attr_accessor :user_id, :item_id, :postal, :region_id, :city, :city_num, :building, :tel_num
   attr_accessor :token
 
-  validates :user_id, :item_id, :city_num, presence: true
+  validates :user_id, :item_id, :city_num, :token, presence: true
   validate :postal_validation
   validates :region_id, numericality: { other_than: 1, message: 'is invalid' }
   validate :city_validation
@@ -37,7 +37,7 @@ end
 def tel_num_validation
   if tel_num.blank?
     errors.add(:tel_num, "can't be blank")
-  elsif !tel_num.match?(/\A\d{10,11}\z/)
+  elsif tel_num.match?(/\A(\d{0,9}|\d{12,20})(-\d{0,9}|\d{12,20})*\z/)
     errors.add(:tel_num, 'は10桁以上11桁以下の半角数字で入力してください')
   end
 end
