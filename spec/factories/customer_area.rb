@@ -9,6 +9,5 @@ FactoryBot.define do
     token { Faker::Alphanumeric.alphanumeric(number: 20) }
     user_id { 1 }
     item_id { 1 }
-    customer_id { 1 }
   end
 end

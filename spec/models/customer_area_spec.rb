@@ -70,11 +70,6 @@ RSpec.describe CustomerArea, type: :model do
         @customer_area.valid?
         expect(@customer_area.errors.full_messages).to include("Item can't be blank")
       end
-      it 'customerが紐付いていないと保存できないこと' do
-        @customer_area.customer_id = nil
-        @customer_area.valid?
-        expect(@customer_area.errors.full_messages).to include("Customer can't be blank")
-      end
     end
   end
 end

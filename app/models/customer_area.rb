@@ -1,7 +1,7 @@
 class CustomerArea
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal, :region_id, :city, :city_num, :building, :tel_num
-  attr_accessor :token, :customer_id
+  attr_accessor :token
 
   validates :user_id, :item_id, :city_num, presence: true
   validate :postal_validation
@@ -12,8 +12,7 @@ class CustomerArea
   def save
     customer = Customer.create(user_id:, item_id:)
 
-    Area.create(postal:, region_id:, city:, city_num:, building:, tel_num:,
-                customer_id: customer.id)
+    Area.create(postal:, region_id:, city:, city_num:, building:, tel_num:)
   end
 end
 
