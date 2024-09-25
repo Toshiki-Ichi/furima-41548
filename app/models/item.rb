@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :responsible
   belongs_to :shipping_day
   belongs_to :status
+  has_one :customer
 
   validates :image, :item_name, :note, :price, presence: true
   validates :category_id, :status_id, :responsible_id, :region_id, :shipping_day_id, presence: true,
