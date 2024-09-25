@@ -2,18 +2,23 @@ require 'rails_helper'
 
 RSpec.describe CustomerArea, type: :model do
   before do
-    @customer_area = FactoryBot.build(:customer_area)
-  end
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item, user: @user)
+    @customer_area = FactoryBot.build(:customer_area,user_id: @user.id, item_id: @item.id)
+   end
+
   describe '商品購入機能' do
     context '購入できる場合' do
       it 'すべての値が正しく入力されていれば購入できること' do
         expect(@customer_area).to be_valid
       end
+
       it 'tel_numは10桁の半角数字でも購入できること' do
         @customer_area.tel_num = '1234567890'
         expect(@customer_area).to be_valid
       end
-      it 'buildは空でも購入できること' do
+
+      it 'buildingは空でも購入できること' do
         @customer_area.building = ''
         expect(@customer_area).to be_valid
       end
