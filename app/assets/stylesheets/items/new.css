@@ -227,3 +227,10 @@
 .inc {
   font-size: 13px;
 }
+
+.preview-image {
+  max-width: 200px; /* 最大幅を200pxに設定 */
+  max-height: 200px; /* 最大高さを200pxに設定 */
+  width: auto; /* アスペクト比を保つ */
+  height: auto; /* アスペクト比を保つ */
+}
