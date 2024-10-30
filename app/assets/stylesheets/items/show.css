@@ -205,3 +205,25 @@
   font-weight: bold;
   font-size: 23px;
 }
+
+.other-images {
+  display: flex;
+  height: 50vh;
+  width: 60vw;
+  min-height: 500px;
+  background-color: rgb(205, 202, 202);
+  object-fit: contain;
+}
+
+
+.other-image img {
+  max-width: 100%; /* 画像の最大幅を親要素の幅に設定 */
+  height: auto;    /* 高さを自動調整してアスペクト比を維持 */
+}
+
+.image-delete-button {
+  text-align: center;
+  border: solid 1px;
+  cursor: pointer;
+}
+

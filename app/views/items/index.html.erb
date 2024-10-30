@@ -132,7 +132,7 @@
       <li class='list'>
         <%= link_to item_path(item.id) do %>
         <div class='item-img-content'>
-          <%= image_tag item.image, class: "item-img", alt: "商品画像" %>
+          <%= image_tag item.images[0], class: "item-img", alt: "商品画像" %>
       <% if Customer.where(item_id: item.id).exists? %>
           <div class='sold-out'>
            <span>Sold Out!!</span>
