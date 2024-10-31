@@ -22,10 +22,10 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Note can't be blank")
       end
-      it 'imageが空では登録できない' do
-        @item.image = nil
+      it 'imagesが空では登録できない' do
+        @item.images = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Image can't be blank")
+        expect(@item.errors.full_messages).to include("Images can't be blank")
       end
       it 'priceが空では登録できない' do
         @item.price = ''
