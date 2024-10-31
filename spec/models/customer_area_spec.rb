@@ -33,7 +33,7 @@ RSpec.describe CustomerArea, type: :model do
       it 'postalが空だと購入できないこと' do
         @customer_area.postal = ''
         @customer_area.valid?
-        expect(@customer_area.errors.full_messages).to include("Postal can't be blank")
+        expect(@customer_area.errors.full_messages).to include("Postal は空白では登録できません")
       end
       it 'postalが半角のハイフンを含んだ正しい形式でないと購入できないこと' do
         @customer_area.postal = '1234567'
@@ -43,12 +43,12 @@ RSpec.describe CustomerArea, type: :model do
       it 'region_idを選択していないと購入できないこと' do
         @customer_area.region_id = 1
         @customer_area.valid?
-        expect(@customer_area.errors.full_messages).to include('Region is invalid')
+        expect(@customer_area.errors.full_messages).to include('Region は---以外を選択してください')
       end
       it 'cityが空だと購入できないこと' do
         @customer_area.city = ''
         @customer_area.valid?
-        expect(@customer_area.errors.full_messages).to include("City can't be blank")
+        expect(@customer_area.errors.full_messages).to include("City は空白では登録できません")
       end
       it 'city_numが空だと購入できないこと' do
         @customer_area.city_num = ''
@@ -58,7 +58,7 @@ RSpec.describe CustomerArea, type: :model do
       it 'tel_numが空だと購入できないこと' do
         @customer_area.tel_num = ''
         @customer_area.valid?
-        expect(@customer_area.errors.full_messages).to include("Tel num can't be blank")
+        expect(@customer_area.errors.full_messages).to include("Tel num は空白では登録できません")
       end
       it 'tel_numに数値以外 例:(-) がある場合購入できないこと' do
         @customer_area.tel_num = '180-1234-4567'
