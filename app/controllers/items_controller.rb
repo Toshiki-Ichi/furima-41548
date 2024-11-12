@@ -1,17 +1,24 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :destroy, :edit]
   before_action :set_item, only: [:edit, :show, :update]
+  before_action :set_categories, only: [:new,:create,:edit,:update]
   def index
     @items = Item.includes(:user).order(created_at: :desc)
   end
 
   def new
     @item = Item.new
+    @categories = Category.new
   end
 
   def create
     @item = Item.new(item_params)
-    @item.user = current_user
+    # Ancestryに基づいてカテゴリーを見つける
+    @category = Category.find_by(ancestry: params[:item][:ancestry])
+
+      @item.category = @category  # アイテムにカテゴリーを関連付ける
+      @item.user = current_user    # ユーザーの設定    @item.user = current_user
+
     if @item.save
       redirect_to root_path
     else
@@ -20,17 +27,20 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @category = @item.category
   end
 
   def edit
+    @categories = Category.new
     return unless current_user.id != @item.user.id || Customer.where(item_id: @item.id).exists?
 
     redirect_to root_path
   end
 
   def update
-    @item.update(item_params)
-    if @item.save
+    @category = Category.find_by(ancestry: params[:item][:ancestry])
+    @item.category = @category  
+    if @item.update(item_params)
       redirect_to item_path(@item)
     else
       render :edit, status: :unprocessable_entity
@@ -53,8 +63,12 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def item_params
-   params.require(:item).permit(:item_name, :note, :price, :category_id, :status_id, :responsible_id, :region_id, :shipping_day_id,{images: []})
-
+  def set_categories
+    @maincategories = Category.all.order("id ASC").limit(13)
   end
+
+  def item_params
+   params.require(:item).permit(:item_name, :note, :price, :status_id, :responsible_id, :region_id, :shipping_day_id,{images: []})
+  end
+
 end

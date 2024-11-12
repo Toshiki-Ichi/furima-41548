@@ -52,7 +52,17 @@
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= @item.category.name %></td>
+          <td class="detail-value">
+          <% if @category %>
+            <% @category.path.each_with_index do |category, index| %>
+              <%= category.name %>
+              <%# 最後のカテゴリー名以外に「/」を追加 %>
+              <%= "/" unless index == @category.path.size - 1 %>
+            <% end %>
+          <% else %>
+            カテゴリー情報がありません
+          <% end %>
+        </td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
