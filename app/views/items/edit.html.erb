@@ -51,7 +51,7 @@ app/assets/stylesheets/items/new.css %>
           <span class="indispensable">必須</span>
         </div>
           <div id="select-wrap">
-        <%= f.collection_select :ancestry, @maincategories, :id, :name, {include_blank: "---"}, {id: "parent-category" } %>
+        <%= f.collection_select :ancestry, @maincategories, :id, :name, {include_blank: "---"}, {id: "parent-category", class: "select-box" } %>
         </div>
         <div class="weight-bold-text">
           商品の状態

@@ -46,6 +46,8 @@ window.addEventListener('turbo:load', function () {
 
     childWrap.setAttribute('id', 'child-select-wrap')
     childSelect.setAttribute('id', 'child-select')
+    childSelect.setAttribute('class', 'select-box');
+
 
     // forEach文でitem（子カテゴリーの値）を繰り返す
     items.forEach(item => {
@@ -57,6 +59,7 @@ window.addEventListener('turbo:load', function () {
 
     childWrap.appendChild(childSelect)
     selectWrap.appendChild(childWrap)
+    
   }
 
   // 孫カテゴリーの値を全て取得する関数 
@@ -80,6 +83,7 @@ window.addEventListener('turbo:load', function () {
 
     grandchildWrap.setAttribute('id', 'grand-child-select-wrap')
     grandchildSelect.setAttribute('id', 'grand-child-select')
+    grandchildSelect.setAttribute('class', 'select-box');
 
     // forEach文でitem（孫カテゴリーの値）を繰り返す
     items.forEach(item => {
