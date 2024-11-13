@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_23_150055) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_12_142110) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -52,6 +52,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_23_150055) do
     t.index ["customer_id"], name: "index_areas_on_customer_id"
   end
 
+  create_table "categories", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.string "ancestry"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "customers", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "item_id", null: false
@@ -65,7 +72,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_23_150055) do
     t.string "item_name", null: false
     t.text "note", null: false
     t.integer "price", null: false
-    t.integer "category_id", null: false
     t.integer "status_id", null: false
     t.integer "responsible_id", null: false
     t.integer "region_id", null: false
@@ -73,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_23_150055) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
