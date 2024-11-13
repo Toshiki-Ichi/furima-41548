@@ -38,9 +38,14 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @category = Category.find_by(ancestry: params[:item][:ancestry])
-    @item.category = @category  
-    if @item.update(item_params)
+    if params[:item][:ancestry].present?
+      @category = Category.find_by(ancestry: params[:item][:ancestry])
+      @item.category = @category
+    end
+    update_params = item_params.compact
+    update_params.delete(:images) if update_params[:images].blank? || update_params[:images] == [""]
+    update_params.delete(:category) if update_params[:category].blank?
+    if @item.update(update_params)
       redirect_to item_path(@item)
     else
       render :edit, status: :unprocessable_entity
