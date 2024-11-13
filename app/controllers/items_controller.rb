@@ -13,10 +13,8 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    # Ancestryに基づいてカテゴリーを見つける
-    @category = Category.find_by(ancestry: params[:item][:ancestry])
-
-      @item.category = @category  # アイテムにカテゴリーを関連付ける
+    @grandchild = Category.find(params[:category_id])
+    @item.category = @grandchild # 孫カテゴリーを関連付ける
       @item.user = current_user    # ユーザーの設定    @item.user = current_user
 
     if @item.save
@@ -39,8 +37,9 @@ class ItemsController < ApplicationController
 
   def update
     if params[:item][:ancestry].present?
-      @category = Category.find_by(ancestry: params[:item][:ancestry])
-      @item.category = @category
+      @grandchild = Category.find(params[:category_id])
+      @item.category = @grandchild # 孫カテゴリーを関連付ける
+      @item.user = current_user    # ユーザーの設定    @item.user = current_user
     end
     update_params = item_params.compact
     update_params.delete(:images) if update_params[:images].blank? || update_params[:images] == [""]

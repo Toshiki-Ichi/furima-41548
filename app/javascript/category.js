@@ -95,8 +95,15 @@ window.addEventListener('turbo:load', function () {
 
     grandchildWrap.appendChild(grandchildSelect)
     childWrap.appendChild(grandchildWrap)
+
+      // 孫カテゴリーが選択された時にフォームの隠しフィールドにIDを設定
+      grandchildSelect.addEventListener('change', function () {
+      const hiddenField = document.getElementById('grandchild-category-id');
+      hiddenField.value = grandchildSelect.value;  // 孫カテゴリーのIDを隠しフィールドに設定
+    })
   }
 
+  
   // 親カテゴリーを選択した後の発火するイベント
   parentCategory.addEventListener('change', function () {
     selectChildElement('child-select-wrap')

@@ -52,6 +52,8 @@
         <div id="select-wrap">
         <%= f.collection_select :ancestry, @maincategories, :id, :name, {include_blank: "---"}, {id: "parent-category", class: "select-box" } %>
         </div>
+        <!-- 孫カテゴリーのIDを保存する隠しフィールド -->
+        <input type="hidden" id="grandchild-category-id" name="category_id" value="">
         <div class="weight-bold-text">
           商品の状態
           <span class="indispensable">必須</span>
