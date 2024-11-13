@@ -117,7 +117,16 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
+  <a href="#" class="another-item"> 
+  <% if @category %>
+  <% @category.path.each_with_index do |category, index| %>
+    <%= category.name %>
+    <%# 最後のカテゴリー名以外に「/」を追加 %>
+    <%= "/" unless index == @category.path.size - 1 %>
+  <% end %>
+<% else %>
+  カテゴリー情報がありません
+<% end %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>
